@@ -36,17 +36,6 @@ When you enter a race result, you need to hit the calculate button for
 the race itself and each series which the race is part of.
 */
 
-//
-// This function adds the MYC menu item with the "Calculate menu item
-//
-function onOpen() {
-    var ss = SpreadsheetApp.getActiveSpreadsheet();
-    var menuItems = [ { name: "Calculate", functionName: "calculateResults" } ];
-    ss.addMenu("MYC", menuItems);
-}
-
-
-// Handle the "Calculate" menu item
 function calculateResults() {
     var sheet = SpreadsheetApp.getActiveSheet();
 
