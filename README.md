@@ -12,8 +12,8 @@ To use it, you want to do e.g.:
   }
 
   function calc() {
+    var windage = UrlFetchApp.fetch("https://raw.github.com/markmc/windage/master/windage.js");
+    eval(windage.getContentText());
     return calculateResults();
   }
 
-  var windage = UrlFetchApp.fetch("https://raw.github.com/markmc/windage/master/windage.js");
-  eval(windage.getContentText());
