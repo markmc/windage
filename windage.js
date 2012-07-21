@@ -433,7 +433,7 @@ function calculateRaceResults(sheet) {
 // "DNF
 //
 function elapsedTime_(start, finish) {
-    if (finish == "DNF") {
+    if (finish == "DNF" || finish == "AVG") {
         return finish;
     }
     var startInSeconds = dateToSeconds_(start);
@@ -448,7 +448,7 @@ function elapsedTime_(start, finish) {
 // it by the handicap and convert the resulting number
 // of seconds into a time object
 function correctedTime_(elapsed, handicap) {
-    if (elapsed == "DNF") {
+    if (elapsed == "DNF" || elapsed == "AVG") {
         return elapsed;
     }
     var ret = dateToSeconds_(elapsed) * handicap;
@@ -461,7 +461,7 @@ function correctedTime_(elapsed, handicap) {
 // Subtract that time from its actual elapsed time to
 //   give the number of seconds faster it would need to win
 function toWin_(elapsed, handicap, correctedTimes) {
-    if (elapsed == "DNF") {
+    if (elapsed == "DNF" || elapsed == "AVG") {
         return elapsed;
     }
     var winningTime = Number.MAX_VALUE;
@@ -495,7 +495,7 @@ function sortfunc_(a, b) {
 // The special cases of an empty time value or a "DNF"
 // is handled by just returning the input
 function rank_(time, times) {
-    if (!time || time == "DNF") {
+    if (!time || time == "DNF" || time == "AVG") {
         return time;
     }
     time = dateToSeconds_(time);
