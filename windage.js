@@ -250,17 +250,17 @@ function calculateSeriesResults(sheet, placeRange) {
                 }
                 if (results[i][j] == "DNF") {
                     dnf_points = racePlaces.length + DNF_PENALTY
-                    points.push(dnf_points);
+                    points.push([j, dnf_points]);
                     results[i][j] = "DNF(" + dnf_points + ")";
                 } else if (results[i][j] == "DNC") {
                     dnc_points = racePlaces.length + DNC_PENALTY;
-                    points.push(dnc_points);
+                    points.push([j, dnc_points]);
                     results[i][j] = "DNC(" + dnc_points + ")";
                 } else if (results[i][j] == "AVG") {
-                    points.push(0);
+                    points.push([j, 0]);
                     numAvgs++;
                 } else {
-                    points.push(results[i][j]);
+                    points.push([j, results[i][j]]);
                 }
             }
         }
@@ -270,7 +270,7 @@ function calculateSeriesResults(sheet, placeRange) {
 
         var total = 0;
         for (var k = 0; k < points.length; k++) {
-            total += points[k];
+            total += points[k][1];
         }
 
         average_points = 0
@@ -488,10 +488,12 @@ function toWin_(elapsed, handicap, correctedTimes) {
 }
 
 //
-// Dumb integer sorting function
+// Dumb points sorting function
+// Each entry in the points array is a two item array
+// where the second item is the actual points
 //
 function sortfunc_(a, b) {
-    return a - b;
+    return a[1] - b[1];
 }
 
 // Rank a given corrected time relative to a supplied
