@@ -216,10 +216,13 @@ function calculateSeriesResults(sheet, placeRange) {
 
     // Initialize the contents of the series table
     var results = [];
+    var fontlines = []
     for (var i = 0; i < sailNos.length; i++) {
         results.push([]);
+        fontlines.push([]);
         for (var j = 0; j < races[0].length; j++) {
             results[i].push("");
+            fontlines[i].push(null);
         }
     }
 
@@ -292,6 +295,7 @@ function calculateSeriesResults(sheet, placeRange) {
 
     // Stage 6 - write out the series table
     sheet.getRange(2, 4, sailNos.length, races[0].length).setValues(results);
+    sheet.getRange(2, 4, sailNos.length, races[0].length).setFontLines(fontlines);
 
     // Stage 7 - generate hyperlinks
     var spreadSheetUrl = spreadSheet.getUrl().replace("/ccc?", "/pub?");
