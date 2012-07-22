@@ -269,7 +269,6 @@ function calculateSeriesResults(sheet, placeRange) {
             total += points[k];
         }
         if (points.length) {
-            Logger.log(total + " " +  points.length + " " + numAvgs);
             total += total / (points.length - numAvgs) * numAvgs;
         }
 
@@ -285,7 +284,6 @@ function calculateSeriesResults(sheet, placeRange) {
     var headers = [];
     for (var i = 0; i < races[0].length; i++) {
         if (races[0][i] != "Total") {
-            Logger.log(races[0][i]);
             var sheetId = spreadSheet.getSheetByName(races[0][i]).getSheetId();
             var url = spreadSheetUrl + "&gid=" + sheetId + "&single=true";
             headers.push("=hyperlink(\"" + url + "\", \"" + races[0][i] + "\")");
@@ -293,7 +291,6 @@ function calculateSeriesResults(sheet, placeRange) {
             headers.push(races[0][i]);
         }
     }
-    Logger.log(headers);
     sheet.getRange(1, 4, 1, races[0].length).setValues([headers]);
 }
 
