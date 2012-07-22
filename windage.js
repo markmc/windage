@@ -268,8 +268,19 @@ function calculateSeriesResults(sheet, placeRange) {
         for (var k = 0; k < points.length; k++) {
             total += points[k];
         }
+
+        average_points = 0
         if (points.length) {
-            total += total / (points.length - numAvgs) * numAvgs;
+            average_points = total / (points.length - numAvgs);
+        }
+        total += average_points * numAvgs;
+
+        if (average_points) {
+            for (var j = 0; j < sheets.length; j++) {
+                if (results[i][j] == "AVG") {
+                    results[i][j] = "AVG(" + average_points.toFixed(2) + ")";
+                }
+            }
         }
 
         results[i][j] = total;
