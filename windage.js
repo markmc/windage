@@ -268,8 +268,11 @@ function calculateSeriesResults(sheet, placeRange) {
             }
         }
 
+        num_discards = numDiscards_(points.length)
+
         points.sort(sortfunc_);
-        points = points.slice(0, points.length - numDiscards_(points.length));
+        discarded_points = points.slice(points.length - num_discards, points.length)
+        points = points.slice(0, points.length - num_discards);
 
         var total = 0;
         for (var k = 0; k < points.length; k++) {
@@ -286,6 +289,11 @@ function calculateSeriesResults(sheet, placeRange) {
             for (var j = 0; j < sheets.length; j++) {
                 if (results[i][j] == "AVG") {
                     results[i][j] = "AVG(" + average_points.toFixed(2) + ")";
+                }
+                for (var k = 0; k < discarded_points.length; k++) {
+                    if (discarded_points[k][0] == j) {
+                        fontlines[i][j] = "line-through";
+                    }
                 }
             }
         }
