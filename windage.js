@@ -298,7 +298,7 @@ function calculateSeriesResults(sheet, placeRange) {
             }
         }
 
-        results[i][j] = total;
+        results[i][j] = total.toFixed(2);
     }
 
     // Stage 6 - write out the series table
