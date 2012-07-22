@@ -249,9 +249,13 @@ function calculateSeriesResults(sheet, placeRange) {
                     results[i][j] = "DNC";
                 }
                 if (results[i][j] == "DNF") {
-                    points.push(racePlaces.length + DNF_PENALTY);
+                    dnf_points = racePlaces.length + DNF_PENALTY
+                    points.push(dnf_points);
+                    results[i][j] = "DNF(" + dnf_points + ")";
                 } else if (results[i][j] == "DNC") {
-                    points.push(racePlaces.length + DNC_PENALTY);
+                    dnc_points = racePlaces.length + DNC_PENALTY;
+                    points.push(dnc_points);
+                    results[i][j] = "DNC(" + dnc_points + ")";
                 } else if (results[i][j] == "AVG") {
                     points.push(0);
                     numAvgs++;
