@@ -270,7 +270,7 @@ function calculateSeriesResults(sheet, placeRange) {
 
         num_discards = numDiscards_(points.length)
 
-        points.sort(sortfunc_);
+        points.sort(compare_points_);
         discarded_points = points.slice(points.length - num_discards, points.length)
         points = points.slice(0, points.length - num_discards);
 
@@ -500,12 +500,19 @@ function toWin_(elapsed, handicap, correctedTimes) {
 }
 
 //
-// Dumb points sorting function
+// Ppoints sorting function
 // Each entry in the points array is a two item array
 // where the second item is the actual points
 //
-function sortfunc_(a, b) {
+function compare_points_(a, b) {
     return a[1] - b[1];
+}
+
+//
+// Dumb integer sorting function
+//
+function compare_integers_(a, b) {
+    return a - b;
 }
 
 // Rank a given corrected time relative to a supplied
@@ -532,7 +539,7 @@ function rank_(time, times) {
             timesInSeconds.push(inSeconds);
         }
     }
-    timesInSeconds.sort(sortfunc_);
+    timesInSeconds.sort(compare_integers_);
     for (var i = 0; i < timesInSeconds.length; i++) {
         if (time <= timesInSeconds[i]) {
             return i+1;
