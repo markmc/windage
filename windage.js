@@ -73,7 +73,7 @@ var N_BOAT_ROWS = 30;
 // DNF is scored as number of starters plus one
 var DNF_PENALTY = 1;
 // DNC is scored as number of starters plus three
-var DNC_PENALTY = 3;
+var DNC_PENALTY = 1;
 
 // Range in each race sheet for ECHO placing
 var ECHO_PLACE_RANGE = "O3:O23";
@@ -325,19 +325,11 @@ function calculateSeriesResults(sheet, placeRange) {
 // Calculate the number of discards to be applied
 // for a given number of races.
 //
-// A single discard after 3 races, 2 discards after
-// 5 races and an extra discard for every 3 races
-// after that
+// A single discard after 4 races
 //
 function numDiscards_(numRaces) {
     var discards = 0;
-    if ((numRaces -= 3) >= 0) {
-        discards++;
-    }
-    if ((numRaces -= 2) >= 0) {
-        discards++;
-    }
-    while ((numRaces -= 3) >= 0) {
+    if ((numRaces -= 4) >= 0) {
         discards++;
     }
     return discards;
