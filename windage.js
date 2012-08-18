@@ -251,10 +251,12 @@ function calculateSeriesResults(sheet, placeRange) {
                 if (!results[i][j]) {
                     results[i][j] = "DNC";
                 }
-                if (results[i][j] == "DNF") {
+                if (results[i][j] == "DNF" ||
+                    results[i][j] == "DSQ" ||
+                    results[i][j] == "BFD") {
                     dnf_points = racePlaces.length + DNF_PENALTY
                     points.push([j, dnf_points]);
-                    results[i][j] = "DNF(" + dnf_points + ")";
+                    results[i][j] = results[i][j] + "(" + dnf_points + ")";
                 } else if (results[i][j] == "DNC") {
                     dnc_points = racePlaces.length + DNC_PENALTY;
                     points.push([j, dnc_points]);
@@ -457,7 +459,7 @@ function calculateRaceResults(sheet) {
 // "DNF
 //
 function elapsedTime_(start, finish) {
-    if (finish == "DNF" || finish == "AVG") {
+    if (finish == "DNF" || finish == "DSQ" || finish == "BFD" || finish == "AVG") {
         return finish;
     }
     var startInSeconds = dateToSeconds_(start);
@@ -472,7 +474,7 @@ function elapsedTime_(start, finish) {
 // it by the handicap and convert the resulting number
 // of seconds into a time object
 function correctedTime_(elapsed, handicap) {
-    if (elapsed == "DNF" || elapsed == "AVG") {
+    if (elapsed == "DNF" || elapsed == "DSQ" || elapsed == "BFD" || elapsed == "AVG") {
         return elapsed;
     }
     var ret = dateToSeconds_(elapsed) * handicap;
@@ -485,7 +487,7 @@ function correctedTime_(elapsed, handicap) {
 // Subtract that time from its actual elapsed time to
 //   give the number of seconds faster it would need to win
 function toWin_(elapsed, handicap, correctedTimes) {
-    if (elapsed == "DNF" || elapsed == "AVG") {
+    if (elapsed == "DNF" || elapsed == "DSQ" || elapsed == "BFD" || elapsed == "AVG") {
         return elapsed;
     }
     var winningTime = Number.MAX_VALUE;
@@ -528,7 +530,7 @@ function compare_integers_(a, b) {
 // The special cases of an empty time value or a "DNF"
 // is handled by just returning the input
 function rank_(time, times) {
-    if (!time || time == "DNF" || time == "AVG") {
+    if (!time || time == "DNF" || time == "DSQ" || time == "BFD" || time == "AVG") {
         return time;
     }
     time = dateToSeconds_(time);
