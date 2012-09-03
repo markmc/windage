@@ -68,7 +68,7 @@ var BOATS_SHEET = 'Boats';
 var N_BOAT_COLUMNS = 10;
 
 // The max number of boats in the Boats sheet
-var N_BOAT_ROWS = 30;
+var N_BOAT_ROWS = 50;
 
 // DNF is scored as number of starters plus one
 var DNF_PENALTY = 1;
@@ -76,9 +76,9 @@ var DNF_PENALTY = 1;
 var DNC_PENALTY = 1;
 
 // Range in each race sheet for ECHO placing
-var ECHO_PLACE_RANGE = "O3:O23";
+var ECHO_PLACE_RANGE = "O3:O27";
 // Range in each race sheet for IRC placing
-var IRC_PLACE_RANGE = "J3:J23";
+var IRC_PLACE_RANGE = "J3:J27";
 
 // Bizarre stuff. See:
 // http://stackoverflow.com/questions/10363169/reading-and-writing-time-values-from-to-a-spreadsheet-using-gas
@@ -160,7 +160,7 @@ function lookupBoat_(boats, sail) {
 function calculateSeriesResults(sheet, placeRange) {
     var boats = getBoats_();
 
-    var sailNos = sheet.getRange("A2:A22").getValues();
+    var sailNos = sheet.getRange("A2:A26").getValues();
     var races = sheet.getRange("D1:K1").getValues();
 
     // Stage 1 - boat names and owners
@@ -176,7 +176,7 @@ function calculateSeriesResults(sheet, placeRange) {
         }
     }
 
-    sheet.getRange("B2:C22").setValues(boatNamesAndOwners);
+    sheet.getRange("B2:C26").setValues(boatNamesAndOwners);
 
     var spreadSheet = SpreadsheetApp.getActiveSpreadsheet();
 
@@ -202,7 +202,7 @@ function calculateSeriesResults(sheet, placeRange) {
     // Stage 4 - get the placings
     var places = [];
     for (var i = 0; i < sheets.length; i++) {
-        var sailValues = sheets[i].getRange("A3:A23").getValues();
+        var sailValues = sheets[i].getRange("A3:A28").getValues();
         var placeValues = sheets[i].getRange(placeRange).getValues();
         var racePlaces = [];
         for (var j = 0; j < sailValues.length; j++) {
@@ -378,8 +378,8 @@ function calculateRaceResults(sheet) {
     }
 
     // 2 - Get the sail numbers and finishing time of entrants
-    var sailNos = sheet.getRange("A3:A23").getValues();
-    var finishTimes = sheet.getRange("D3:D23").getValues();
+    var sailNos = sheet.getRange("A3:A28").getValues();
+    var finishTimes = sheet.getRange("D3:D28").getValues();
 
     var boatNamesAndOwners = [];
     var elapsedTimes = [];
@@ -432,10 +432,10 @@ function calculateRaceResults(sheet) {
     }
 
     // 6 - Insert all the calculated values into the sheet
-    sheet.getRange("B3:C23").setValues(boatNamesAndOwners);
-    sheet.getRange("E3:E23").setValues(elapsedTimes);
-    sheet.getRange("G3:J23").setValues(ircResults);
-    sheet.getRange("L3:O23").setValues(echoResults);
+    sheet.getRange("B3:C28").setValues(boatNamesAndOwners);
+    sheet.getRange("E3:E28").setValues(elapsedTimes);
+    sheet.getRange("G3:J28").setValues(ircResults);
+    sheet.getRange("L3:O28").setValues(echoResults);
 }
 
 // Calculate the elapsed time between a given
