@@ -161,7 +161,7 @@ function calculateSeriesResults(sheet, placeRange) {
     var boats = getBoats_();
 
     var sailNos = sheet.getRange("A2:A22").getValues();
-    var races = sheet.getRange("D1:K1").getValues();
+    var races = sheet.getRange("D1:N1").getValues();
 
     // Stage 1 - boat names and owners
     var boatNamesAndOwners = [];
